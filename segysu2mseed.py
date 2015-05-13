@@ -41,9 +41,9 @@ def segysu2mseed(sismosegy):
 			st[i].stats.channel = 'BHE'
 		elif channel[i] == '17':
 			st[i].stats.channel = 'BHN'
-	for tr in st:
-		tr.data = 1000000000000*tr.data
-		tr.data = np.require(tr.data, dtype = "int32")
-	st.write(sismosegy.split(".")[0]+".mseed", format="mseed", encoding= 10)	
+       #for tr in st:
+		#tr.data = 1000000000000*tr.data
+		#tr.data = np.require(tr.data, dtype = "int32")
+	st.write(sismosegy.split(".")[0]+".mseed", format="mseed")#, encoding= 10)	
 	st1 = read(sismosegy.split(".")[0]+".mseed")
 	return(0)

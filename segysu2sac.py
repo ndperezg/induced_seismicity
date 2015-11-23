@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Function that converts SEG-Y data to MSEED trace of PRE
+Function that converts SEG-Y data to SAC trace of PRE
 
 """ 
 
@@ -10,9 +10,10 @@ import numpy as np
 import sys
 import os
 
-def segysu2mseed(sismosegy):
+def segysu2sac(sismosegy):
 	head = 'header'
 	metadata = 'metadata.out'
+	name = sismosegy.split(".")[0]
 	os.system('segyread tape='+sismosegy+' verbose=1 endian=0 | segyclean > data.su')
 	if str(os.path.isfile(head))=='False':
 		print "Error: no file "+head
@@ -44,6 +45,9 @@ def segysu2mseed(sismosegy):
        #for tr in st:
 		#tr.data = 1000000000000*tr.data
 		#tr.data = np.require(tr.data, dtype = "int32")
-	st.write(sismosegy.split(".")[0]+".mseed", format="mseed")#, encoding= 10)	
-	#st1 = read(sismosegy.split(".")[0]+".mseed")
+	st.write("output.sac", format="sac", byteorder=">")#, encoding= 10)
+	
+		
+	#st1 = read(sismosegy.split(".")[0]+".sac")
+	
 	return(0)
